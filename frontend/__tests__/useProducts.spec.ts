@@ -83,4 +83,15 @@ describe("useProducts", () => {
     await waitFor(() => expect(result.current.total).toBe(255));
     expect(result.current.saved).toBe(35);
   });
+
+  it("pay() clears cart, totals & receipt", async () => {
+    const { result } = renderHookWithClient(() => useProducts());
+    await waitFor(() => expect(result.current.catalogue).toHaveLength(4));
+
+    act(() => result.current.scan("BANANA"));
+    act(() => result.current.pay());
+
+    await waitFor(() => expect(result.current.total).toBe(0));
+    expect(result.current.receipt).toHaveLength(0);
+  });
 });
