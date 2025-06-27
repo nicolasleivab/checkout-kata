@@ -15,6 +15,7 @@
     "build": "tsc -p . && vite build --config frontend/vite.config.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.81.2",
     "better-sqlite3": "^9.1.0",
     "concurrently": "^9.0.0",
     "cors": "^2.8.5",
