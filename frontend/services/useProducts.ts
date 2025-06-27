@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getProducts } from "./api";
 import { TProductRow } from "../../backend/models/product.model.js";
+import { useQuery } from "@tanstack/react-query";
 
 type TTotals = { total: number; saved: number };
+const PRODUCTS_QK = ["products"];
 
 function calculateTotals(
   cart: Record<string, number>,
@@ -35,14 +37,19 @@ function calculateTotals(
 }
 
 export function useProducts() {
-  const [catalogue, setCatalogue] = useState<TProductRow[]>([]);
+  const {
+    data: catalogue = [],
+    isLoading, // Can be used for a loading mask
+    error, // For future implementation of toasts
+  } = useQuery<TProductRow[]>({
+    queryKey: PRODUCTS_QK,
+    queryFn: getProducts,
+    staleTime: 60_000, // 1 min for now. Later we can invalidate this cache by introducing mutations to the project
+  });
+
   const [cart, setCart] = useState<Record<string, number>>({});
   const [total, setTotal] = useState(0);
   const [saved, setSaved] = useState(0);
-
-  useEffect(() => {
-    getProducts().then(setCatalogue);
-  }, []);
 
   const scan = (sku: string) =>
     setCart((prev) => {

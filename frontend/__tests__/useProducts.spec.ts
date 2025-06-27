@@ -35,17 +35,18 @@ global.fetch = jest.fn(() =>
 
 import { useProducts } from "../services/useProducts";
 import { TProductRow } from "../../backend/models/product.model";
+import { renderHookWithClient } from "../utils";
 
 describe("useProducts", () => {
   it("loads catalogue and starts at zero", async () => {
-    const { result } = renderHook(() => useProducts());
+    const { result } = renderHookWithClient(() => useProducts());
 
     await waitFor(() => expect(result.current.catalogue).toHaveLength(4));
     expect(result.current.total).toBe(0);
   });
 
   it("applies 2-for-45 discount on APPLE", async () => {
-    const { result } = renderHook(() => useProducts());
+    const { result } = renderHookWithClient(() => useProducts());
     await waitFor(() => expect(result.current.catalogue).toHaveLength(4));
 
     act(() => result.current.scan("APPLE"));
@@ -56,7 +57,7 @@ describe("useProducts", () => {
   });
 
   it("applies 3-for-130 discount on BANANA", async () => {
-    const { result } = renderHook(() => useProducts());
+    const { result } = renderHookWithClient(() => useProducts());
     await waitFor(() => expect(result.current.catalogue).toHaveLength(4));
 
     act(() => result.current.scan("BANANA"));
@@ -68,7 +69,7 @@ describe("useProducts", () => {
   });
 
   it("applies any offer regardless of the scan order", async () => {
-    const { result } = renderHook(() => useProducts());
+    const { result } = renderHookWithClient(() => useProducts());
     await waitFor(() => expect(result.current.catalogue).toHaveLength(4));
 
     act(() => result.current.scan("BANANA"));
