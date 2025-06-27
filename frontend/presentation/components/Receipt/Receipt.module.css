@@ -1,5 +1,6 @@
 .receipt {
-  width: 40rem;
+  max-width: 40rem;
+  width: 95%;
   margin-top: 1.5rem;
   height: 15rem;
   overflow-y: auto;
