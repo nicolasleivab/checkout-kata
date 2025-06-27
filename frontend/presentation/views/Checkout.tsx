@@ -1,9 +1,9 @@
 import { useProducts } from "../../services/useProducts";
-import { ProductCard } from "../components";
+import { ProductCard, Summary } from "../components";
 import styles from "./Checkout.module.css";
 
 export default function Checkout() {
-  const { catalogue, scan } = useProducts();
+  const { catalogue, scan, total, saved } = useProducts();
 
   return (
     <main style={{ fontFamily: "sans-serif", padding: 24 }}>
@@ -20,6 +20,8 @@ export default function Checkout() {
           />
         ))}
       </section>
+
+      <Summary total={total} saved={saved} />
     </main>
   );
 }
