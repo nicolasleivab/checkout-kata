@@ -1,5 +1,5 @@
 import { jest } from "@jest/globals";
-import { renderHook, act, waitFor } from "@testing-library/react";
+import { act, waitFor } from "@testing-library/react";
 
 const catalogue: TProductRow[] = [
   { sku: "APPLE", name: "Apple", unit_price: 30, offer_n: 2, offer_price: 45 },
