@@ -1,9 +1,9 @@
 import { useProducts } from "../../services/useProducts";
-import { ProductCard, Summary } from "../components";
+import { ProductCard, Receipt, Summary } from "../components";
 import styles from "./Checkout.module.css";
 
 export default function Checkout() {
-  const { catalogue, scan, total, saved } = useProducts();
+  const { catalogue, scan, total, saved, receipt, pay } = useProducts();
 
   return (
     <main style={{ fontFamily: "sans-serif", padding: 24 }}>
@@ -22,6 +22,16 @@ export default function Checkout() {
       </section>
 
       <Summary total={total} saved={saved} />
+
+      <Receipt receipt={receipt} />
+
+      <button
+        className={styles.payBtn}
+        onClick={pay}
+        disabled={receipt.length === 0}
+      >
+        Pay
+      </button>
     </main>
   );
 }
