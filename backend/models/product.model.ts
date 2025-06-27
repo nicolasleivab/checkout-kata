@@ -1,6 +1,8 @@
 import db from "../db";
 
-export type TSku = "APPLE" | "BANANA" | "PEACH" | "KIWI";
+export const SKUS = ["APPLE", "BANANA", "PEACH", "KIWI"] as const;
+export type TSku = (typeof SKUS)[number];
+
 export type TProductRow = {
   sku: TSku;
   name: string;
