@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 type TTotals = { total: number; saved: number };
 const PRODUCTS_QK = ["products"];
+export type TReceiptLine = { desc: string; cents: number };
 
 function calculateTotals(
   cart: Record<string, number>,
@@ -48,25 +49,41 @@ export function useProducts() {
   });
 
   const [cart, setCart] = useState<Record<string, number>>({});
+  const [receipt, setReceipt] = useState<TReceiptLine[]>([]);
   const [total, setTotal] = useState(0);
   const [saved, setSaved] = useState(0);
 
   const scan = (sku: string) =>
     setCart((prev) => {
+      const beforeTotals = calculateTotals(prev, catalogue);
+
       const next = { ...prev, [sku]: (prev[sku] ?? 0) + 1 };
-      const totals = calculateTotals(next, catalogue);
+      const afterTotals = calculateTotals(next, catalogue);
 
-      setTotal(totals.total);
-      setSaved(totals.saved);
+      setTotal(afterTotals.total);
+      setSaved(afterTotals.saved);
 
+      const item = catalogue.find((p) => p.sku === sku)!;
+      const lines: TReceiptLine[] = [
+        { desc: item.name, cents: item.unit_price },
+      ];
+
+      const delta = afterTotals.total - beforeTotals.total; // what customer actually paid
+      const discountCents = item.unit_price - delta;
+      if (discountCents > 0) {
+        lines.push({ desc: `${item?.name} discount`, cents: -discountCents });
+      }
+
+      setReceipt((old) => [...old, ...lines]);
       return next;
     });
 
   const pay = () => {
     setCart({});
+    setReceipt([]);
     setTotal(0);
     setSaved(0);
   };
 
-  return { catalogue, cart, total, saved, scan, pay };
+  return { catalogue, cart, total, saved, scan, receipt, pay };
 }
