@@ -23,15 +23,7 @@ export default function Checkout() {
 
       <Summary total={total} saved={saved} />
 
-      <Receipt receipt={receipt} />
-
-      <button
-        className={styles.payBtn}
-        onClick={pay}
-        disabled={receipt.length === 0}
-      >
-        Pay
-      </button>
+      <Receipt receipt={receipt} pay={pay} />
     </main>
   );
 }
