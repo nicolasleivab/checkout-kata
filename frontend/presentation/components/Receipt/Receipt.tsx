@@ -22,7 +22,7 @@ export default function Receipt({ receipt, pay }: TSummaryProps) {
   return (
     <section aria-labelledby="receipt-heading" role="region">
       <div className={styles.receipt}>
-        <h3 id="receipt-heading" className="sr-only">
+        <h3 id="receipt-heading" className={styles.srOnly}>
           Receipt
         </h3>
 
