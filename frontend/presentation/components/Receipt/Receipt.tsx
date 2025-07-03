@@ -31,7 +31,10 @@ export default function Receipt({ receipt, pay }: TSummaryProps) {
         ) : (
           <ol className={styles.list}>
             {receipt.map(({ desc, cents }, i) => (
-              <li className={`${styles.line} ${erasing ? styles.erasing : ""}`}>
+              <li
+                key={`${desc}-${i}`}
+                className={`${styles.line} ${erasing ? styles.erasing : ""}`}
+              >
                 <span>{desc}</span>
                 <span
                   className={cents < 0 ? styles.negative : undefined}

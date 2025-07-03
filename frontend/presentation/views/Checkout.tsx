@@ -1,9 +1,10 @@
-import { useProducts } from "../../services/useProducts";
+import { useProductsOptimized } from "../../services/useProductsOptimized";
 import { ProductCard, Receipt, Summary } from "../components";
 import styles from "./Checkout.module.css";
 
 export default function Checkout() {
-  const { catalogue, scan, total, saved, receipt, pay } = useProducts();
+  const { catalogue, scan, total, saved, receipt, pay } =
+    useProductsOptimized();
 
   return (
     <main style={{ fontFamily: "sans-serif", padding: 24 }}>
