@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "./api";
-import type { TProductRow, TSku } from "../../backend/models/product.model.js";
+import type { TProductRow, TSku } from "../types/products";
 
 const PRODUCTS_QK = ["products"];
 export type TReceiptLine = { desc: string; cents: number };

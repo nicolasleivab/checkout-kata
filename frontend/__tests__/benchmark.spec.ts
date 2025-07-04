@@ -5,7 +5,7 @@ import { jest } from "@jest/globals";
 import { renderHookWithClient } from "../utils";
 import { useProductsOptimized } from "../services/useProductsOptimized";
 import { useProducts } from "../services/useProducts";
-import type { TProductRow } from "../../backend/models/product.model";
+import type { TProductRow } from "../types/products";
 
 // Reduced catalogue to the 2 products with offers
 const catalogue: TProductRow[] = [

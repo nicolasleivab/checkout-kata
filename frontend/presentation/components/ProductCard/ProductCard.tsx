@@ -1,4 +1,4 @@
-import { TSku } from "../../../../backend/models/product.model";
+import { TSku } from "../../../types/products";
 import styles from "./ProductCard.module.css";
 import { iconBySku } from "../icons";
 import { IconType } from "react-icons";

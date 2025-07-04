@@ -1,5 +1,10 @@
 import { useProductsOptimized } from "../../services/useProductsOptimized";
-import { ProductCard, Receipt, Summary } from "../components";
+import {
+  ProductCard,
+  Receipt,
+  Summary,
+  ProductPricingForm,
+} from "../components";
 import styles from "./Checkout.module.css";
 
 export default function Checkout() {
@@ -9,6 +14,8 @@ export default function Checkout() {
   return (
     <main style={{ fontFamily: "sans-serif", padding: 24 }}>
       <h1>🏷️ Checkout</h1>
+
+      <ProductPricingForm />
 
       <section className={styles.grid}>
         {catalogue.map((p) => (
