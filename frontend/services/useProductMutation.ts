@@ -2,8 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProductPricing } from "./api";
 import { TUpdatePriceOfferParams } from "../types/products";
 import { useCart } from "../contexts/CartContext";
-
-const PRODUCTS_QK = ["products"];
+import { PRODUCTS_QK } from "./useProducts";
 
 export function useProductMutation() {
   const queryClient = useQueryClient();
