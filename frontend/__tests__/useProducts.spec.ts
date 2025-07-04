@@ -34,7 +34,7 @@ global.fetch = jest.fn(() =>
 ) as any;
 
 import { useProducts } from "../services/useProducts";
-import { TProductRow } from "../../backend/models/product.model";
+import { TProductRow } from "../types/products";
 import { renderHookWithClient } from "../utils";
 
 describe("useProducts", () => {

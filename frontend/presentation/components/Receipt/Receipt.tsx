@@ -22,7 +22,7 @@ export default function Receipt({ receipt, pay }: TSummaryProps) {
   return (
     <section aria-labelledby="receipt-heading" role="region">
       <div className={styles.receipt}>
-        <h3 id="receipt-heading" className="sr-only">
+        <h3 id="receipt-heading" className={styles.srOnly}>
           Receipt
         </h3>
 
@@ -31,7 +31,10 @@ export default function Receipt({ receipt, pay }: TSummaryProps) {
         ) : (
           <ol className={styles.list}>
             {receipt.map(({ desc, cents }, i) => (
-              <li className={`${styles.line} ${erasing ? styles.erasing : ""}`}>
+              <li
+                key={`${desc}-${i}`}
+                className={`${styles.line} ${erasing ? styles.erasing : ""}`}
+              >
                 <span>{desc}</span>
                 <span
                   className={cents < 0 ? styles.negative : undefined}

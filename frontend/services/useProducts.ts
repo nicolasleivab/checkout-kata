@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { getProducts } from "./api";
-import { TProductRow } from "../../backend/models/product.model.js";
+import { TProductRow } from "../types/products";
 import { useQuery } from "@tanstack/react-query";
 
 type TTotals = { total: number; saved: number };
-const PRODUCTS_QK = ["products"];
+export const PRODUCTS_QK = ["products"];
 export type TReceiptLine = { desc: string; cents: number };
 
 function calculateTotals(
