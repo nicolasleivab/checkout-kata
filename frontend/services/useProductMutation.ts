@@ -1,11 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProductPricing } from "./api";
 import { TUpdatePriceOfferParams } from "../types/products";
+import { useCart } from "../contexts/CartContext";
 
 const PRODUCTS_QK = ["products"];
 
 export function useProductMutation() {
   const queryClient = useQueryClient();
+  const { clearCart } = useCart();
 
   const mutation = useMutation({
     mutationFn: ({
@@ -21,6 +23,8 @@ export function useProductMutation() {
     onSuccess: () => {
       // Invalidate and refetch products after successful mutation
       queryClient.invalidateQueries({ queryKey: PRODUCTS_QK });
+      // Clear the cart since prices have changed
+      clearCart();
     },
 
     onError: (error: Error) => {
